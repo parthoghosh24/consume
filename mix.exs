@@ -13,11 +13,12 @@ defmodule Consume.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
-    [applications: [:logger, :mongodb_ecto, :ecto]]
+    [applications: [:logger, :mongodb_ecto, :ecto],
+     mod: {Consume.App, []}]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [{:mongodb_ecto, "~> 0.1"}]
+    [{:mongodb_ecto, "~> 0.1"}, {:aws, "~> 0.5.0"}]
   end
 end
