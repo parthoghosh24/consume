@@ -10,7 +10,7 @@ defmodule Consume.Work do
 
   def pump_data_to_kinesis do
   	records = for n <- 1..10, do: %{data: "data#{Enum.random(1..1000)}#{n}", partition_key: "123"}	
-  	put_request = ExAws.Kinesis.put_records("test_stream", records) |> ExAws.request
+  	put_request = Kinesis.put_records("test_stream", records) |> ExAws.request
   end
 
   def read_kinesis do
