@@ -1,19 +1,12 @@
 defmodule Consume do
-  import Models.Datum
-  import Consume.Repo
-  import Ecto.Query
+  use Application
 
-  @moduledoc """
-  Documentation for Consume. This is the main module which is doing all work
-  """
+  def start(_type, _args) do
+    import Supervisor.Spec
 
-  def insert(kinesis_data) do
-    Consume.Repo.insert! %Models.Datum{kinesis_data: kinesis_data}
-  end
-
-  def show do
-    query = from data in Models.Datum, select: data
-    Consume.Repo.all(query)
+    tree = [worker(Consume.Repo, [])]
+    opts = [name: Consume.Sup, strategy: :one_for_one]
+    Supervisor.start_link(tree, opts)
   end
 
 end

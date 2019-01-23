@@ -7,6 +7,11 @@ config :consume, Consume.Repo,
   database: "consume",
   hostname: "localhost"
 
+config :ex_aws,
+  region: "us-east-1",
+  access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+  secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role]  
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
